@@ -1,7 +1,7 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Solver {
+public class TriangleSolver {
     public static double C;
     public static double A;
     public static double B;
@@ -10,9 +10,6 @@ public class Solver {
     public static double a;
     public static int method;
     public static String[] ways = new String[]{"AAS", "SSA", "SAS", "SSS"};
-    public static void main(String[] args) {
-        go();
-    }
     public static void go(){
         getInputs();
         solve();
