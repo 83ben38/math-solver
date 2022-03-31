@@ -1,6 +1,7 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
+
 public class TriangleSolver {
     public static double C;
     public static double A;
@@ -89,6 +90,10 @@ public class TriangleSolver {
         }
     }
     public static void printResults(){
+        if (Double.isNaN(a) || Double.isNaN(b)|| Double.isNaN(c)|| Double.isNaN(A)|| Double.isNaN(B)|| Double.isNaN(C) || a < 0 || b < 0 || c < 0 || A < 0 || B < 0 || C < 0){
+            System.out.println("This triangle does not exist.");
+            return;
+        }
         System.out.println("Sides: " + a + "," + b + "," + c);
         System.out.println("Angles (corresponding): " + A + "," + B + "," + C);
     }
