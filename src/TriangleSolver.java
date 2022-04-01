@@ -15,10 +15,6 @@ public class TriangleSolver {
         getInputs();
         solve();
         printResults();
-        System.out.println("Would you like to do another one?");
-        if (getYesOrNo()) {
-            go();
-        }
     }
     public static void getInputs(){
         System.out.println("Which method are you solving with?");
@@ -108,8 +104,5 @@ public class TriangleSolver {
     }
     public static double acos(double number){
         return Math.toDegrees(Math.acos(number));
-    }
-    public static boolean getYesOrNo(){
-        return !new Scanner(System.in).next().equalsIgnoreCase("no");
     }
 }
