@@ -12,7 +12,7 @@ public class ParametricSolver{
     static double x;
     static double y;
     static double wind;
-    public static String[] ways = new String[]{"posAtTime","groundHitTime","maxHeight"};
+    public static String[] ways = new String[]{"posAtTime","groundHitTime","maxHeight", "heightAtDistance"};
     static int method;
     public static void go(){
         getInputs();
@@ -42,7 +42,7 @@ public class ParametricSolver{
             System.out.println("What is the wind?");
             wind = results.nextDouble();
         }
-        if (method == 1){
+        if (method == 1 || method == 2){
             System.out.println("What is the rate?");
             rate = results.nextDouble();
             System.out.println("What is the angle?");
@@ -54,8 +54,25 @@ public class ParametricSolver{
             System.out.println("What is the wind?");
             wind = results.nextDouble();
         }
+        if (method == 3){
+            System.out.println("What is the rate?");
+            rate = results.nextDouble();
+            System.out.println("What is the angle?");
+            angle = results.nextDouble();
+            System.out.println("What is the starting x?");
+            startingX = results.nextDouble();
+            System.out.println("What is the starting y?");
+            startingY = results.nextDouble();
+            System.out.println("What is the wind?");
+            wind = results.nextDouble();
+            System.out.println("What is the x?");
+            x = results.nextDouble();
+        }
     }
     public static void solve(){
+        if(method == 3){
+            time = (x-startingX)/(rate*cos(angle) + wind);
+        }
         if(method == 1){
             double i = 1;
             double s = 1;
@@ -71,7 +88,27 @@ public class ParametricSolver{
             }
             time = i;
         }
-        if (method == 0  || method == 1){
+        if(method == 2){
+            double i = 1;
+            double max = startingY;
+            double s = 1;
+            while (s > 0.0000001) {
+                while (-16 * i * i + rate * sin(angle) * i + startingY > max){
+                    max = -16 * i * i + rate * sin(angle) * i + startingY;
+                    i += s;
+                }
+                i-=s;
+                s*=0.1;
+                while (-16 * i * i + rate * sin(angle) * i + startingY > max){
+                    max = -16 * i * i + rate * sin(angle) * i + startingY;
+                    i += s;
+                }
+                i-=s;
+                s*=0.1;
+            }
+            time = i;
+        }
+        if (method == 0  || method == 1 || method == 2 || method == 3){
             x = (rate*cos(angle) + wind)*time + startingX;
             y = -16*time*time + rate*sin(angle)*time + startingY;
             xEquation = (rate*cos(angle) + wind) + "t";
